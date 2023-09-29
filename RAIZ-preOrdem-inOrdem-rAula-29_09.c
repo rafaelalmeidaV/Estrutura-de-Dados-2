@@ -2,46 +2,65 @@
 #include <stdlib.h>
 #include <conio.h>
 
-//Implementação dos algoritmos de 
-//percurso em profundidade
+// Implementação dos algoritmos de
+// percurso em profundidade
 
-struct No{
+struct No
+{
     int dado;
-    struct No* esquerda;
-    struct No* direita;
+    struct No *esquerda;
+    struct No *direita;
 };
 
-void preOrdem(struct No* raiz){
-    //SE HOUVER ELEMENTO DA ARVORE
-    if(raiz!=NULL){
-        //passo 1 - imprima os dados da raiz
+void preOrdem(struct No *raiz)
+{
+    // SE HOUVER ELEMENTO DA ARVORE
+    if (raiz != NULL)
+    {
+        // passo 1 - imprima os dados da raiz
         printf("\nDado: %d", raiz->dado);
         getch();
-        //passo 2 - chame o processo pré-ordem
-        //para a esquerda
+        // passo 2 - chame o processo pré-ordem
+        // para a esquerda
         preOrdem(raiz->esquerda);
-        //passo 3 - chame o processo pré-ordem
-        //para a esquerda
+        // passo 3 - chame o processo pré-ordem
+        // para a esquerda
         preOrdem(raiz->direita);
-
     }
 }
 
-void inOrdem(struct No* raiz){
+void inOrdem(struct No *raiz)
+{
 
-    if(raiz!=NULL){
-    //esquerda
-    inOrdem(raiz->esquerda);
-    //raiz
-    printf("\nDado: %d", raiz->dado);
-    getch();
-    //direita
-    inOrdem(raiz->direita);
+    if (raiz != NULL)
+    {
+        // esquerda
+        inOrdem(raiz->esquerda);
+        // raiz
+        printf("\nDado: %d", raiz->dado);
+        getch();
+        // direita
+        inOrdem(raiz->direita);
+    }
+}
+void posOrdem(struct No *raiz)
+{
+
+    if (raiz != NULL)
+    {
+        // esquerda
+        posOrdem(raiz->esquerda);
+        // direita
+        posOrdem(raiz->direita);
+        // raiz
+        printf("\nDado: %d", raiz->dado);
+        getch();
     }
 }
 
-int main(){
-    struct No* raiz = malloc(sizeof(struct No));
+int main()
+{
+    struct No *raiz = malloc(sizeof(struct No));
     raiz->dado = 1;
 
     raiz->esquerda = malloc(sizeof(struct No));
@@ -54,7 +73,13 @@ int main(){
     raiz->esquerda->direita = NULL;
     raiz->direita->esquerda = NULL;
     raiz->direita->direita = NULL;
-    
+
+    printf("\nPre-Ordem");
+    preOrdem(raiz);
+
+    printf("\nIn-Ordem");
     inOrdem(raiz);
 
+    printf("\nPos-Ordem");
+    posOrdem(raiz);
 }
